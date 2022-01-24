@@ -5,25 +5,22 @@
 
 class Vehicle
 {
-    std::string name;
+    std::string name; // just using std:: cause i don't wanna import all of std just for a .h file
     std::string type;
     int kms;
 
 public:
-    Vehicle()
-    {
-        this->name = "";
-        this->type = "";
-        this->kms = NULL;
-    }
 
+    // basic constructor to set private variables 
     Vehicle(std::string name, std::string type, int kms)
     {
+        // this-> to ensure the compiler can tell variables appart
         this->name = name;
         this->type = type;
         this->kms = kms;
     }
 
+    // sample function
     void carDetails()
     {
         std::cout << "Name: " << this->name << std::endl;
@@ -31,11 +28,14 @@ public:
         std::cout << "KMS:  " << this->kms << std::endl;
     }
 
+    // sample function
     void drive()
     {
         std::cout << "vrrrrrrrrrrrrrrrrrrrr" << std::endl;
     }
 
+    // get / set functions 
+    
     std::string getName()
     {
         return this->name;
