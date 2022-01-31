@@ -3,13 +3,25 @@
 
 #include "iostream"
 
+// sample class definition 
 class Vehicle
 {
+// defaults to private
+
     std::string name; // just using std:: cause i don't wanna import all of std just for a .h file
     std::string type;
     int kms;
 
+// set everything below this to be accessible from outside the class 
 public:
+    
+    // default constructor
+    Vehicle()
+    {
+        this->name = "some name";
+        this->type = "a car";
+        this->kms = 250;
+    }
 
     // basic constructor to set private variables 
     Vehicle(std::string name, std::string type, int kms)
@@ -35,7 +47,7 @@ public:
     }
 
     // get / set functions 
-    
+
     std::string getName()
     {
         return this->name;
