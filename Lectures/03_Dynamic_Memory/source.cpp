@@ -43,6 +43,24 @@ public:
     }
 };
 
+
+// memory leaks in functions 
+void someFunction1()
+{
+    int* ptr = new int(10);
+}
+
+// need to deallocate memory that has been allocated in a function, 
+// unless the function is returning the pointer to be used somewhere else
+void someFunction2()
+{
+    int* ptr = new int(10);
+
+    // do something...
+
+    delete ptr;
+}
+
 int main()
 {
     // set variables 
@@ -52,12 +70,14 @@ int main()
     // pass i by value
     increment1(i);
 
-    // pass j by referance
+    // pass j by reference
     increment2(&j);
 
     // display result
     cout << "i = " << i << endl;         // 0
     cout << "j = " << j << endl << endl; // 1
+
+
 
 
 
@@ -77,12 +97,17 @@ int main()
 
 
 
+
+
     // writing in stack
     int numbers1[5] = { 1, 2, 3, 4, 5 }; // compile time constant
     for(int i = 0; i < 5; i++)
     {
         cout << numbers1[i] << ", ";
     }
+
+    // get the size of array, this does NOT work if you only have the pointer to the array
+    cout << "\nconstant size array: " << sizeof(numbers1) / sizeof(numbers1[0]);
 
 
     // writing in heap
@@ -148,6 +173,43 @@ int main()
     point = new int(3);
     cout << "ptr: " << *point << endl;
     cout << "address: " << point << endl;
+
+    // proper cleanup
+    delete point ;
+    point = nullptr;
+
+
+
+
+    int *arr = new int[5];
+    arr[0] = 5;
+    arr[0] = 5;
+    arr[0] = 5;
+    arr[0] = 5;
+    arr[0] = 5;
+
+    // delete array, if you don't add the [] it will only delete the first element of the array
+    delete[] arr;
+    arr = new int[6]; 
+
+    // keyword (nothrow) will return nullptr if the os cannot give the requested memory
+    arr = new (nothrow) int[50];
+
+    if (arr == nullptr)
+    {
+        cout << "could not allocate memory for array" << endl;
+    }
+    else 
+    {
+        cout << "successfully allocated memory for array" << endl;
+    }
+
+
+    // cleanup
+    delete ptr2;
+    delete[] numbers2;
+    delete car2;
+    delete[] arr;
 
     return 0;
 }
