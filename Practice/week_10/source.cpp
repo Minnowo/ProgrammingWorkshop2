@@ -76,8 +76,11 @@ public:
         this->name = copyCStr(name);
 
         // alternatively to using the copyCStr function above
-        // this->name = new char[strlen(name) + 1];
-        // strcpy(this->name, name);
+        // int len = strlen(name) + 1;
+        // this->name = new char[len];
+        // // strcpy(this->name, name); // since this throws an error cause it's depricated use the line below
+        // strcpy_s(this->name, len, name);
+
 
     }
 
